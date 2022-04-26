@@ -3,27 +3,25 @@ const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-P2 = Math.PI * 2;
+const P2 = Math.PI * 2;
 const particleArray = [];
 let hue = 0;
-window.addEventListener('resize', function () {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
-
 const mouse = {
     x: undefined,
     y: undefined
 }
 
+window.addEventListener('resize', function () {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
 canvas.addEventListener('click', function (event) {
     mouse.x = event.x;
     mouse.y = event.y;
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 100; i++) {
         particleArray.push(new Particle());
     }
 })
-
 canvas.addEventListener('mousemove', function (event) {
     mouse.x = event.x;
     mouse.y = event.y;
@@ -32,21 +30,8 @@ canvas.addEventListener('mousemove', function (event) {
     }
 })
 
-// function drawCircle() {
-//     //set properties before stroking and filling
-//     ctx.strokeStyle = 'green';
-//     ctx.fillStyle = 'blue';
-//     ctx.lineWidth = 10
-//     //arc require beginPath as it can be both a line and a shape and lines require beginPath
-//     ctx.beginPath();
-//     ctx.arc(mouse.x, mouse.y, 50, 0, P2); // <-- add the arc to the path
-//     ctx.fill()
-//     ctx.stroke()
-// }
-
 class Particle {
     constructor() {
-
         this.x = mouse.x;
         this.y = mouse.y;
         this.size = Math.random() * 20 + 1;
@@ -61,24 +46,13 @@ class Particle {
     }
     draw() {
         ctx.fillStyle = this.color
-        //arc require beginPath as it can be both a line and a shape and lines require beginPath
+        //arc requires beginPath as it can be both a line and a shape and lines require beginPath
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, P2); // x,y,radius,startAngle (0 to the right), endangle,[reverse rotation]
         ctx.fill()
-
+        
     }
 }
-
-// function init() {
-//     for (let i = 0; i < 1000; i++) {
-//         particleArray.push(new Particle());
-
-//     }
-// }
-// init()
-
-//particleArray.filter 
-
 
 function handleParticles() {
     for (i = 0; i < particleArray.length; i++) {
@@ -108,15 +82,6 @@ function handleParticles() {
         }
     }
 }
-// function filterBySize(array) {
-//     return array.filter(p => p.size > 0.3);    
-// }
-// const temp=[{size:3  },{size:2  },{size:0.2  },{size:0.3  },{size:0.1  },{size:1  }]
-// temp2= filterByValue(temp)
-// console.log(temp2)
-// function filterByValue(array) {
-//     return array.filter(p => p.size > 0.3);    
-// }
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -127,3 +92,33 @@ function animate() {
     requestAnimationFrame(animate);
 }
 animate();
+// function drawCircle() {
+    //     //set properties before stroking and filling
+    //     ctx.strokeStyle = 'green';
+    //     ctx.fillStyle = 'blue';
+    //     ctx.lineWidth = 10
+    //     //arc require beginPath as it can be both a line and a shape and lines require beginPath
+    //     ctx.beginPath();
+    //     ctx.arc(mouse.x, mouse.y, 50, 0, P2); // <-- add the arc to the path
+    //     ctx.fill()
+    //     ctx.stroke()
+    // }
+    
+    // function init() {
+        //     for (let i = 0; i < 1000; i++) {
+            //         particleArray.push(new Particle());
+            
+            //     }
+            // }
+            // init()
+            
+            // function filterBySize(array) {
+                //     return array.filter(p => p.size > 0.3);    
+                // }
+                // const temp=[{size:3  },{size:2  },{size:0.2  },{size:0.3  },{size:0.1  },{size:1  }]
+                // temp2= filterByValue(temp)
+                // console.log(temp2)
+                // function filterByValue(array) {
+                    //     return array.filter(p => p.size > 0.3);    
+                    // }
+                    //particleArray.filter 
