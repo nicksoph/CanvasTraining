@@ -1,2 +1,3 @@
 # CanvasTrainingTemplate
-bare min for vanila canvas 
+
+bare min for vanila canvas
