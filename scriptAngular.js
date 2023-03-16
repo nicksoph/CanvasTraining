@@ -16,16 +16,16 @@ canvas.height = window.innerHeight;
 ccx = canvas.width / 2
 ccy = canvas.height / 2
 // user inputs
-const scale = .15
-const num = 10000
-//  freq, ampl, phase, damp, x.used, y.used, time added per tick
+const scale = .055
+const num = 1000
+//  freq, ampl, phase, damp, x.used, y.used, tick size
 const data = [
-    [1.01, 200, 0, 0.0002, true, false, .01013],
-    [1.01, 2000, 0, 0.0002, false, true, 0.01013],
-    [.001, 2000, 1.3333333, 0.0002, true, false, 0.01013],
-    [5.001, 2000, 0, .0003, false, true, 0.01013],
-    [1, 200, 0, .00021, false, true, 0.01013],
-    [4.01, 4000, 0.1, 0.0002, true, false, 0.0013],
+    [60.01, 200, 0, 0.0002, true, false, .01013],
+    [60.01, 2000, 0, 0.0002, false, true, 0.01013],
+    [10, 2000, 1.3333333, 0.0002, true, false, 0.01013],
+    [50.001, 2000, 0, .0003, false, true, 0.01013],
+    [60, 200, 0, .00021, false, true, 0.01013],
+    [40.01, 4000, 0.1, 0.0002, true, false, 0.0013],
     // [1.5, 100, 0, .0001, true, false, 0.0013],
     // [1.01, 200, 0, .0003, false, true, 0.0013],
     // [1, 300, 0, .00021, true, false, 0.0013]
@@ -159,9 +159,9 @@ function colour(start, step) {
 function xy(arr) {
     // let point = {};
     arr.forEach(p => {
+        let point = {}
         point.x = p.x
         point.y = p.y
-
         XYarray.push(point)
     })
 }
@@ -192,6 +192,8 @@ colour(100, 0.025)
 //lines()
 circles()
 
+xy(particleArray)
+console.log(XYarray)
 
 function gradient(a, b) {
     return (b.y - a.y) / (b.x - a.x);
@@ -223,9 +225,9 @@ function bzCurve(points, f, t) {
         }
 
         ctx.bezierCurveTo(
-            preP.x - dx1, preP.y - dy1,
-            curP.x + dx2, curP.y + dy2,
-            curP.x, curP.y
+            preP.x * scale - dx1 * scale + ccx, preP.y * scale - dy1 * scale + ccy,
+            curP.x * scale + dx2 * scale + ccx, curP.y * scale + dy2 * scale + ccy,
+            curP.x * scale + ccx, curP.y * scale + ccy
         );
 
         dx1 = dx2;
@@ -234,7 +236,6 @@ function bzCurve(points, f, t) {
     }
     ctx.stroke();
 }
-xy(XYarray)
 // Generate random data 
 var lines = [];
 var X = 10;
@@ -251,9 +252,9 @@ for (var i = 0; i < 100; i++) {
 
 // Draw smooth line 
 ctx.setLineDash([0]);
-ctx.lineWidth = 2;
+ctx.lineWidth = 1;
 ctx.strokeStyle = "green";
-console.log(XYarray)
+
 bzCurve(XYarray, 0.3, 1);
 
 

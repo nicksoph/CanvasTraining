@@ -56,20 +56,23 @@ class Particle {
 }
 
 function handleParticles() {
+    let n=0
     for (i = 0; i < particleArray.length; i++) {
         particleArray[i].update();
         particleArray[i].draw();
         for (let j = i; j < particleArray.length; j++) {
+            console.log(n)
+            n=n+1
             const dx = particleArray[i].x - particleArray[j].x
             const dy = particleArray[i].y - particleArray[j].y
             const distance = Math.sqrt(dx * dx + dy * dy)
-            if (distance < 100) {
+            if (distance < 250) {
                 let gradient = ctx.createLinearGradient(particleArray[i].x, particleArray[i].y, particleArray[j].x, particleArray[j].y);
                 gradient.addColorStop(0, particleArray[i].color);
-                gradient.addColorStop(.5, 'white');
+                gradient.addColorStop(.5, 'black');
                 gradient.addColorStop(1, particleArray[j].color);
                 ctx.beginPath();
-                //ctx.strokeStyle = particleArray[i].color;
+                ctx.strokeStyle = particleArray[i].color;
                 ctx.strokeStyle = gradient
                 ctx.lineWidth = particleArray[i].size/7
                 ctx.moveTo(particleArray[i].x, particleArray[i].y)
